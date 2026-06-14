@@ -1,0 +1,36 @@
+# DreamForge AI - Task Checklist
+
+- `[x]` **Phase 1: Project Initialization & Setup**
+  - `[x]` Initialize Next.js 15 app with TypeScript, TailwindCSS, and ESLint
+  - `[x]` Install packages: `framer-motion`, `zustand`, `react-hook-form`, `@prisma/client`, `lucide-react`, `canvas-confetti` (for animations), `docx` and `pdfjs-dist` (optional or simple custom mock handlers for file reads)
+  - `[x]` Install dev dependencies: `prisma`, `tailwindcss-animate`
+- `[x]` **Phase 2: Database & State Configuration**
+  - `[x]` Configure `prisma/schema.prisma` with `World`, `Character`, and `Quest` models
+  - `[x]` Create `src/lib/db.ts` to instantiate PrismaClient with a mock database fallback
+  - `[x]` Create Zustand store `src/store/useWorldStore.ts` to manage worlds and app state
+- `[x]` **Phase 3: Core API Endpoints**
+  - `[x]` Implement POST `/api/world/generate` route
+  - `[x]` Implement mock AI document generator parser to create rich lore, characters, quests, maps, and bosses
+  - `[x]` Implement `/api/world/list` and `/api/world/[id]` routes
+- `[x]` **Phase 4: Global & Reusable Components**
+  - `[x]` Create global styles, typography, and background grids in `globals.css`
+  - `[x]` Implement custom premium components: `Button`, `Card`, `Tabs`, `Textarea`
+  - `[x]` Create layout components: `Navbar`, `Footer`
+- `[x]` **Phase 5: Landing Page (/)**
+  - `[x]` Implement Hero Section (titles, subtitles, dynamic CTA)
+  - `[x]` Implement Features Grid (Story, RPG, Comic, Escape Room, Character AI, World Builder)
+  - `[x]` Implement How It Works & Demo Section
+- `[x]` **Phase 6: Dashboard Page (/dashboard)**
+  - `[x]` Header & action cards (Create Story, RPG, Comic, Escape Room, Character AI)
+  - `[x]` Recent Worlds list fetching from Prisma/Mock client (Techoria, Kingdom of Innovation, Cyber Realm)
+- `[x]` **Phase 7: Upload Page (/upload)**
+  - `[x]` Implement file upload area (drag & drop, support for PDF/DOCX/TXT/MD extensions)
+  - `[x]` Implement paste text text-area
+  - `[x]` Integrate react-hook-form and API request trigger for generation
+- `[x]` **Phase 8: World Overview Page (/world/[id])**
+  - `[x]` Left Sidebar navigation (Overview, Characters, Quests)
+  - `[x]` Main Content displaying lore, characters list, quests list, boss fights, map preview
+- `[x]` **Phase 9: Quality & Styling Polish**
+  - `[x]` Add Framer Motion transitions, hover animations, glassmorphism UI, custom scrollbars
+  - `[x]` Ensure error handling for database failures and invalid file uploads
+  - `[x]` Verify local build compiles with no errors (`npm run build`)

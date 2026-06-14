@@ -1,0 +1,93 @@
+datasource db {
+  provider  = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model World {
+  id             String          @id @default(uuid())
+  title          String
+  lore           String          @db.Text
+  story          Json?           // JSON array of Chapters 1, 2, and 3
+  comic          Json?           // JSON array of 5 panels (Problem, Conflict, Investigation, Solution, Ending)
+  puzzles        Json?           // JSON array of Escape Room puzzles and hints
+  createdAt      DateTime        @default(now())
+  characters     Character[]
+  quests         Quest[]
+  regions        Region[]
+  inventoryItems InventoryItem[]
+  bosses         Boss[]
+  progress       WorldProgress?
+}
+
+model Character {
+  id          String @id @default(uuid())
+  worldId     String
+  world       World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  name        String
+  fantasyName String
+  role        String
+  personality String
+  memory      Json?  // JSON array of memorized facts/context
+  backstory   String @default("")
+  voiceStyle  String @default("")
+}
+
+model Quest {
+  id          String @id @default(uuid())
+  worldId     String
+  world       World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  title       String
+  description String
+  reward      String
+}
+
+model Region {
+  id          String @id @default(uuid())
+  worldId     String
+  world       World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  name        String
+  description String
+  difficulty  String
+  x           Int
+  y           Int
+}
+
+model InventoryItem {
+  id          String @id @default(uuid())
+  worldId     String
+  world       World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  name        String
+  rarity      String
+  description String
+}
+
+model Boss {
+  id          String @id @default(uuid())
+  worldId     String
+  world       World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  name        String
+  title       String
+  weakness    String
+  description String
+}
+
+model WorldProgress {
+  id                   String @id @default(uuid())
+  worldId              String @unique
+  world                World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  completedQuests      Json?  // JSON array of completed quest IDs
+  unlockedRegions      Json?  // JSON array of unlocked region IDs
+  discoveredCharacters Json?  // JSON array of discovered character IDs
+  playerInventory      Json?  // JSON array of gathered item names
+}
+
+model ChatMessage {
+  id          String   @id @default(uuid())
+  characterId String
+  role        String
+  content     String   @db.Text
+  createdAt   DateTime @default(now())
+}
